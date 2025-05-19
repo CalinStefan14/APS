@@ -1,0 +1,84 @@
+﻿@model APS.Models.ViewModels.CreateArticleViewModel
+@{
+    ViewData["Title"] = "Create Article";
+}
+
+<div class="modern-create-article-container">
+    <div class="modern-create-article-header">
+        <h1 class="modern-create-article-title">Creează un anunț</h1>
+    </div>
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data" class="modern-create-article-form glass-card">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="modern-form-group">
+            <label asp-for="Title" class="modern-form-label">Titlu</label>
+            <input asp-for="Title" class="modern-form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="modern-form-group">
+            <label asp-for="Content" class="modern-form-label">Conținut</label>
+            <textarea asp-for="Content" class="modern-form-control" rows="10"></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CategoryId" class="form-label">Categorie</label>
+            <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))">
+                <option value="">-- Select Category --</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <div class="modern-form-group">
+            <label asp-for="CoverImage" class="modern-form-label">Thumbnail</label>
+            <input asp-for="CoverImage" type="file" class="modern-form-control" accept="image/*" />
+            <span asp-validation-for="CoverImage" class="text-danger"></span>
+        </div>
+
+        <div class="modern-form-actions">
+            <button type="submit" class="modern-btn modern-btn-primary">
+                <i class="fas fa-save"></i> Salvează Anunțul
+            </button>
+            <a href="@Url.Action("Index")" class="modern-btn modern-btn-secondary">
+                <i class="fas fa-times"></i> Anulează
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // No additional JavaScript needed
+        });
+    </script>
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/articles.css" />
+    <link rel="stylesheet" href="~/css/modern.css" />
+    <style>
+        .modern-form-label[for="CategoryId"], label[for="CategoryId"] {
+            color: #00cfff;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        select.form-control[name="CategoryId"] {
+            background: #232b36;
+            color: #e0e6ed;
+            border: 1px solid #00cfff;
+            border-radius: 0.7rem;
+            padding: 0.7rem 1rem;
+            font-size: 1.08rem;
+            margin-bottom: 1.2rem;
+        }
+        select.form-control[name="CategoryId"]:focus {
+            border-color: #00cfff;
+            box-shadow: 0 0 0 2px #00cfff33;
+        }
+    </style>
+} 
